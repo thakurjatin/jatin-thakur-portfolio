@@ -3,13 +3,13 @@ import './globals.css';
 import { profile } from '@/data/portfolio';
 
 export const metadata: Metadata = {
-  title: 'Jatin Thakur | Senior Software Engineer',
-  description: 'Portfolio of Jatin Thakur, Senior Software Engineer focused on Java, Spring Boot, backend systems, database modernization, and AWS.',
+  title: 'Jatin Thakur | Senior Backend Engineer · Java, Spring Boot, AWS',
+  description: 'Jatin Thakur is a Senior Software Engineer with 7+ years building regulated banking systems in Java, Spring Boot, Kafka, microservices, and AWS. AWS Certified Solutions Architect – Associate.',
   applicationName: 'Jatin Thakur Portfolio',
   authors: [{ name: 'Jatin Thakur' }],
   openGraph: {
-    title: 'Jatin Thakur | Senior Software Engineer',
-    description: 'Backend engineering, distributed systems, and enterprise modernization.',
+    title: 'Jatin Thakur | Senior Backend Engineer',
+    description: 'Java, Spring Boot, Kafka, microservices, and AWS in regulated banking. 7+ years.',
     type: 'website',
     locale: 'en_IN',
   },

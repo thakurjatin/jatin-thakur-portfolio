@@ -14,3 +14,9 @@
 @media(max-width:390px){.section-shell,.site-header{width:calc(100% - 30px)}.hero h1{font-size:43px}.hero-actions{align-items:stretch;flex-direction:column;max-width:260px}.button{width:100%}.hero-visual{padding:16px 12px}.visual-topline{font-size:7px}.architecture{margin-top:28px}.arch-node{padding:11px 9px}.arch-bottom{gap:7px}.mini-node{gap:6px}.mini-node strong{font-size:9px}.about-grid,.skills-grid,.projects-grid,.credentials-grid,.education-row{margin-left:0}.experience-list{margin-left:0}.section-heading{grid-template-columns:25px 1fr;gap:7px}.heading-index{font-size:10px}.contact-actions{flex-direction:column;align-items:stretch;max-width:260px}.footer-right{margin-left:0;width:100%;justify-content:space-between}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 .not-found{min-height:100vh;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;width:min(760px,calc(100% - 40px));margin:auto}.not-found>span{font-size:10px;letter-spacing:.16em;color:var(--accent);font-weight:750}.not-found h1{font-size:clamp(36px,7vw,64px);line-height:1.08;letter-spacing:-.06em;margin:20px 0 12px}.not-found p{color:var(--muted);font-size:14px}.not-found a{color:var(--accent);font-size:13px;margin-top:16px}
+
+.personal-projects{margin-top:3rem}
+.personal-heading{font-size:1.1rem;margin:0 0 1rem}
+.personal-heading span{opacity:.6;font-weight:400;font-size:.9rem}
+.personal-projects .skill-card p{opacity:.8;line-height:1.55;margin:.5rem 0 1rem}
+.personal-projects .contact-actions{margin-top:1rem}

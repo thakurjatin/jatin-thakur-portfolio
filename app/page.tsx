@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowDownRight, ArrowRight, ArrowUpRight, Check, ChevronDown, Code2, Database, Download, ExternalLink, Github, Linkedin, Mail, Menu, ShieldCheck, X, Cloud, Layers3, TerminalSquare } from 'lucide-react';
-import { certifications, experience, profile, projects, skillGroups } from '@/data/portfolio';
+import { certifications, experience, personalProjects, profile, projects, skillGroups } from '@/data/portfolio';
 
 const navItems = [
   ['About', '#about'], ['Experience', '#experience'], ['Skills', '#skills'], ['Projects', '#projects'], ['Contact', '#contact'],
@@ -61,15 +61,16 @@ export default function HomePage() {
 
       <section className="hero section-shell" aria-labelledby="hero-title">
         <motion.div className="hero-copy" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, ease: 'easeOut' }}>
-          <div className="eyebrow"><span className="status-dot" /> SOFTWARE ENGINEERING · DELHI, INDIA</div>
-          <h1 id="hero-title">Building reliable<br />backend systems<br /><span>for the real world.</span></h1>
-          <p className="hero-intro">I’m <strong>Jatin Thakur</strong>, a Senior Software Engineer with 7+ years of experience building backend services, APIs, and enterprise applications. I focus on Java, Spring Boot, database modernization, and cloud-based engineering.</p>
+          <div className="eyebrow"><span className="status-dot" /> {profile.openToOpportunities ? 'OPEN TO OPPORTUNITIES' : 'SOFTWARE ENGINEERING'} · DELHI, INDIA</div>
+          <h1 id="hero-title">Senior backend engineer<br />for regulated<br /><span>banking platforms.</span></h1>
+          <p className="hero-intro">I’m <strong>Jatin Thakur</strong>, a Senior Software Engineer with 7+ years owning backend systems end to end, from design and APIs to deployment and production support. I work in Java, Spring Boot, Kafka, microservices, and AWS, and I’m an <strong>AWS Certified Solutions Architect – Associate</strong>.</p>
           <div className="hero-actions">
             <a className="button button-primary" href="#projects">Explore my work <ArrowRight size={17} /></a>
             <a className="button button-secondary" href={profile.resumePath} download><Download size={16} /> Download resume</a>
           </div>
           <div className="hero-socials">
             <a href={profile.linkedin} target="_blank" rel="noreferrer"><Linkedin size={16} /> LinkedIn <ArrowUpRight size={13} /></a>
+            {profile.github && <a href={profile.github} target="_blank" rel="noreferrer"><Github size={16} /> GitHub <ArrowUpRight size={13} /></a>}
             <button onClick={copyEmail} aria-label="Copy email address"><Mail size={16} /> {copied ? 'Email copied' : 'Email'} {copied ? <Check size={13} /> : <ArrowUpRight size={13} />}</button>
           </div>
         </motion.div>
@@ -92,9 +93,9 @@ export default function HomePage() {
       </section>
 
       <section className="highlights section-shell" aria-label="Career highlights">
-        <div className="highlight"><span className="highlight-number">01</span><div><strong>7+ years</strong><p>Professional engineering experience</p></div></div>
-        <div className="highlight"><span className="highlight-number">02</span><div><strong>Database modernization</strong><p>Sybase-to-MSSQL migration work</p></div></div>
-        <div className="highlight"><span className="highlight-number">03</span><div><strong>Backend & cloud</strong><p>Java, Spring Boot, AWS, CI/CD</p></div></div>
+        <div className="highlight"><span className="highlight-number">01</span><div><strong>7+ years</strong><p>Backend engineering, Java and Spring Boot</p></div></div>
+        <div className="highlight"><span className="highlight-number">02</span><div><strong>Led Sybase → MSSQL</strong><p>Migration across multiple production applications</p></div></div>
+        <div className="highlight"><span className="highlight-number">03</span><div><strong>AWS Certified</strong><p>Solutions Architect – Associate (2026)</p></div></div>
       </section>
 
       <section className="content-section section-shell" id="about">
@@ -121,12 +122,13 @@ export default function HomePage() {
       </section>
 
       <section className="content-section section-shell projects-section" id="projects">
-        <SectionHeading index="04" eyebrow="SELECTED ENGINEERING WORK" title="Problems worth solving." description="Generalized case studies based on professional experience. Confidential implementation details are intentionally excluded." />
+        <SectionHeading index="04" eyebrow="SELECTED ENGINEERING WORK" title="Problems worth solving." description="Case studies from professional work, generalized to protect employer confidentiality. Personal projects with public code are below." />
         <div className="projects-grid">{projects.map((project, i) => <motion.button className={`project-card ${i === 0 ? 'project-featured' : ''}`} key={project.number} onClick={() => setSelectedProject(i)} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.45, delay: i * 0.07 }}>
           <div className="project-card-top"><span className="project-number">{project.number}</span><span className="project-type">{project.type}</span><span className="project-open"><ArrowUpRight size={18} /></span></div>
           <div className="project-art" aria-hidden="true">{i === 0 ? <MigrationGraphic /> : i === 1 ? <SurveillanceGraphic /> : i === 2 ? <IntegrationGraphic /> : <SearchGraphic />}</div>
           <h3>{project.title}</h3><p>{project.description}</p><div className="tag-row">{project.tags.map((tag) => <span className="tag" key={tag}>{tag}</span>)}</div><span className="case-link">Read case study <ArrowRight size={15} /></span>
         </motion.button>)}</div>
+        {personalProjects.length > 0 && <div className="personal-projects"><h3 className="personal-heading">Personal projects <span>(public code)</span></h3><div className="skills-grid">{personalProjects.map((project) => <article className="skill-card" key={project.title}><div className="skill-card-top"><span className="skill-index">CODE</span><Github size={16} /></div><h3>{project.title}</h3><p>{project.description}</p><div className="skill-tags">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><div className="contact-actions">{project.github && <a className="button button-secondary" href={project.github} target="_blank" rel="noreferrer"><Github size={15} /> View code <ArrowUpRight size={14} /></a>}{project.live && <a className="button button-primary" href={project.live} target="_blank" rel="noreferrer">Live demo <ExternalLink size={14} /></a>}</div></article>)}</div></div>}
       </section>
 
       <section className="content-section section-shell" id="certifications">
@@ -136,7 +138,7 @@ export default function HomePage() {
       </section>
 
       <section className="contact-section section-shell" id="contact">
-        <div className="contact-panel"><div className="contact-glow" aria-hidden="true" /><div className="contact-copy"><span className="section-eyebrow"><span className="eyebrow-line" /> OPEN A CONVERSATION</span><h2>Let’s build something<br /><span>meaningful.</span></h2><p>Interested in backend engineering, platform work, or solving complex systems problems? I’d be glad to connect.</p><div className="contact-actions"><a className="button button-primary" href={`mailto:${profile.email}`}>Get in touch <ArrowUpRight size={16} /></a><a className="button button-secondary" href={profile.linkedin} target="_blank" rel="noreferrer">Connect on LinkedIn <Linkedin size={15} /></a></div></div><div className="contact-side"><span className="contact-side-label">PREFER EMAIL?</span><a href={`mailto:${profile.email}`} className="email-link">{profile.email}<ArrowUpRight size={15} /></a><button className="copy-email" onClick={copyEmail}>{copied ? <Check size={14} /> : <Mail size={14} />}{copied ? 'Copied to clipboard' : 'Copy email address'}</button><div className="contact-divider" /><span className="contact-side-label">PROFESSIONAL PROFILE</span><a className="profile-link" href={profile.linkedin} target="_blank" rel="noreferrer"><Linkedin size={16} /> LinkedIn <ArrowUpRight size={14} /></a>{profile.github && <a className="profile-link" href={profile.github} target="_blank" rel="noreferrer"><Github size={16} /> GitHub <ArrowUpRight size={14} /></a>}</div></div>
+        <div className="contact-panel"><div className="contact-glow" aria-hidden="true" /><div className="contact-copy"><span className="section-eyebrow"><span className="eyebrow-line" /> OPEN A CONVERSATION</span><h2>Let’s build something<br /><span>meaningful.</span></h2><p>{profile.openToOpportunities ? 'I’m open to senior backend and platform engineering roles (Java, Spring Boot, Kafka, AWS). The fastest way to reach me is email or LinkedIn.' : 'Interested in backend engineering, platform work, or solving complex systems problems? I’d be glad to connect.'}</p><div className="contact-actions"><a className="button button-primary" href={`mailto:${profile.email}`}>Get in touch <ArrowUpRight size={16} /></a><a className="button button-secondary" href={profile.linkedin} target="_blank" rel="noreferrer">Connect on LinkedIn <Linkedin size={15} /></a></div></div><div className="contact-side"><span className="contact-side-label">PREFER EMAIL?</span><a href={`mailto:${profile.email}`} className="email-link">{profile.email}<ArrowUpRight size={15} /></a><button className="copy-email" onClick={copyEmail}>{copied ? <Check size={14} /> : <Mail size={14} />}{copied ? 'Copied to clipboard' : 'Copy email address'}</button><div className="contact-divider" /><span className="contact-side-label">PROFESSIONAL PROFILE</span><a className="profile-link" href={profile.linkedin} target="_blank" rel="noreferrer"><Linkedin size={16} /> LinkedIn <ArrowUpRight size={14} /></a>{profile.github && <a className="profile-link" href={profile.github} target="_blank" rel="noreferrer"><Github size={16} /> GitHub <ArrowUpRight size={14} /></a>}</div></div>
       </section>
 
       <footer className="site-footer section-shell"><a className="brand" href="#top"><span className="brand-mark">JT<span>.</span></span><span className="brand-name">Jatin Thakur</span></a><p>Thoughtful engineering. Reliable systems.</p><div className="footer-right"><span>© {new Date().getFullYear()} Jatin Thakur</span><a href="#top">Back to top ↑</a></div></footer>
